@@ -1,0 +1,8 @@
+exports.handler = async (event) => {
+	console.log(JSON.stringfy(event));
+	for (const record of event.Records) {
+		const data = JSON.parse(Buffer.from(record.kinesis.data, 'base64'));
+		//send emails clients, publish the data on social media
+		console.log('consumer #2', data);
+	}
+};

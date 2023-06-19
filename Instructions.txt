@@ -1,0 +1,18 @@
+Whenever we upload a file in S3 bucket, it will trigger a lambda function which is a data producer that lists the file from content from S3 and push the content to kinesis. Then there are 2 lambda consumers which can do various tasks, consumer 1 can read the data and post the data on social media and other platforms, consumer 2 can send the data to a database.
+
+
+Instructions:
+1. Create a role first for the Lambda functions with the policies S3 full access, Cloudwatch full access, and Kinessis full access.
+2. Create 3 Lambda function with the role we created earlier, the three lambda functions should be Producer, consumer 1 and consumer 2.
+3. Now create a S3 bucket, where we can upload the files, and create a event notification with a trigger that whenever a object ends with suffix .txt is added in the bucket, then it should be to sent to the destination which is a Lambda function. The Lambada function is Producer.
+4. Now create a Kinesis data stream service with Provisioned type and add 2 shards. Encrypt the data also, we need to use the kinesis stream name in the Producer Lambda code.
+5. Now all the resources are created, add the codes for all three lambda functions.
+6. Now the setup is ready. Add a text file to the S3 bucket.
+
+
+Once the file is uploaded, check the event triggered to the Producer lambda function in the cloud watch logs, it shows the bucket name, file name, and event details. And also the encryption details. Now check the processed data by the consumer 1 and 2, the encrypted data will show and also the extracted data.
+
+
+
+
+Link : https://www.youtube.com/watch?v=We5Jr4GGLL0&list=LL&index=106
